@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Corte — Barbería en Panamá</title>
+<meta name="description" content="Barbería El Corte. Cortes clásicos y modernos en Panamá. Reserva tu cita hoy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0C0C0C;
+  --white:#F7F5F0;
+  --red:#C8392B;
+  --gray:#2A2A2A;
+  --muted:#6B6B6B;
+  --line:#2A2A2A;
+  --display:"Bebas Neue",sans-serif;
+  --body:"DM Sans",sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--red);color:#fff;}
+a{color:inherit;text-decoration:none;}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:64px;
+  background:rgba(12,12,12,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:var(--display);font-size:22px;letter-spacing:0.06em;}
+.logo span{color:var(--red);}
+nav{display:flex;gap:32px;}
+nav a{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color .2s;}
+nav a:hover{color:var(--white);}
+.nav-cta{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--red);color:#fff;
+  padding:10px 20px;
+  transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.85;}
+
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 40px 64px;
+  position:relative;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    linear-gradient(to bottom, transparent 40%, rgba(12,12,12,0.95) 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.025) 59px, rgba(255,255,255,0.025) 60px);
+}
+.hero-number{
+  position:absolute;top:80px;right:40px;
+  font-family:var(--display);
+  font-size:clamp(180px,28vw,320px);
+  line-height:1;
+  color:rgba(255,255,255,0.03);
+  user-select:none;
+  z-index:0;
+}
+.hero-inner{position:relative;z-index:1;}
+.hero-tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-tag::before{content:"";display:block;width:28px;height:1px;background:var(--red);}
+h1{
+  font-family:var(--display);
+  font-size:clamp(72px,14vw,180px);
+  line-height:0.9;
+  letter-spacing:0.02em;
+  color:var(--white);
+}
+h1 em{color:var(--red);font-style:normal;}
+.hero-sub{
+  margin-top:32px;
+  font-size:16px;color:var(--muted);
+  max-width:40ch;line-height:1.6;
+}
+.hero-actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;}
+.btn-red{
+  font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--red);color:#fff;padding:16px 32px;
+  transition:opacity .2s;display:inline-block;
+}
+.btn-red:hover{opacity:.85;}
+.btn-ghost{
+  font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+  border:1px solid var(--line);color:var(--muted);padding:16px 32px;
+  transition:border-color .2s,color .2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--white);color:var(--white);}
+
+.strip{
+  display:flex;overflow:hidden;border-bottom:1px solid var(--line);
+  background:var(--red);
+}
+.strip-inner{
+  display:flex;gap:0;white-space:nowrap;
+  animation:ticker 18s linear infinite;
+}
+.strip-item{
+  font-family:var(--display);font-size:15px;letter-spacing:0.12em;
+  color:#fff;padding:12px 40px;
+  border-right:1px solid rgba(255,255,255,0.2);
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:96px 40px;border-bottom:1px solid var(--line);}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
+.sec-title{font-family:var(--display);font-size:clamp(36px,6vw,64px);letter-spacing:0.02em;color:var(--white);margin-bottom:48px;}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+.svc{background:var(--black);padding:40px 32px;transition:background .2s;}
+.svc:hover{background:var(--gray);}
+.svc-num{font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:24px;}
+.svc-name{font-family:var(--display);font-size:28px;letter-spacing:0.03em;color:var(--white);margin-bottom:8px;}
+.svc-desc{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:20px;}
+.svc-price{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--white);}
+
+.process-list{display:flex;flex-direction:column;gap:0;}
+.process-item{
+  display:grid;grid-template-columns:64px 1fr;
+  gap:24px;align-items:start;
+  padding:32px 0;border-top:1px solid var(--line);
+}
+.process-item:last-child{border-bottom:1px solid var(--line);}
+.process-n{font-family:var(--display);font-size:48px;color:var(--red);line-height:1;}
+.process-title{font-family:var(--display);font-size:26px;letter-spacing:0.02em;margin-bottom:6px;}
+.process-desc{font-size:15px;color:var(--muted);line-height:1.55;}
+
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-inner h2{font-family:var(--display);font-size:clamp(40px,7vw,80px);letter-spacing:0.02em;line-height:0.95;margin-bottom:32px;}
+.contact-link{
+  display:inline-block;
+  font-family:var(--mono);font-size:14px;letter-spacing:0.06em;
+  color:var(--red);border-bottom:1px solid var(--red);
+  padding-bottom:2px;margin-bottom:16px;
+  transition:opacity .2s;
+}
+.contact-link:hover{opacity:.7;}
+.contact-info{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:2.2;}
+.contact-info b{color:var(--white);font-weight:400;}
+.hours{margin-top:48px;}
+.hours .sec-label{margin-bottom:24px;}
+.hour-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.hour-row .day{color:var(--muted);}
+.hour-row .time{font-family:var(--mono);font-size:12px;}
+
+footer{padding:32px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:var(--display);font-size:18px;letter-spacing:0.06em;color:var(--muted);}
+.foot-logo span{color:var(--red);}
+.foot-copy{font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+@media(max-width:768px){
+  header{padding:0 20px;}
+  nav{display:none;}
+  .hero{padding:0 20px 48px;min-height:100svh;}
+  .hero-number{font-size:140px;right:10px;}
+  section{padding:64px 20px;}
+  .services-grid{grid-template-columns:1fr;}
+  .contact-inner{grid-template-columns:1fr;gap:48px;}
+  footer{padding:28px 20px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .strip-inner{animation:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">EL<span>C</span>ORTE</div>
+  <nav>
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Cómo funciona</a>
+    <a href="#contacto">Ubicación</a>
+  </nav>
+  <a href="#contacto" class="nav-cta">Reservar</a>
+</header>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-number">EC</div>
+  <div class="hero-inner">
+    <p class="hero-tag">Barbería · Panamá City</p>
+    <h1>EL<br><em>CORTE.</em></h1>
+    <p class="hero-sub">Cortes clásicos, degradados modernos y arreglo de barba. Hecho con precisión, sin apuro.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/50700000000" class="btn-red">Reservar por WhatsApp</a>
+      <a href="#servicios" class="btn-ghost">Ver servicios</a>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Corte clásico</span>
+    <span class="strip-item">Degradado</span>
+    <span class="strip-item">Arreglo de barba</span>
+    <span class="strip-item">Afeitado con navaja</span>
+    <span class="strip-item">Sin cita previa</span>
+    <span class="strip-item">Lun – Sáb</span>
+    <span class="strip-item">Corte clásico</span>
+    <span class="strip-item">Degradado</span>
+    <span class="strip-item">Arreglo de barba</span>
+    <span class="strip-item">Afeitado con navaja</span>
+    <span class="strip-item">Sin cita previa</span>
+    <span class="strip-item">Lun – Sáb</span>
+  </div>
+</div>
+
+<section id="servicios">
+  <p class="sec-label">Lo que hacemos</p>
+  <h2 class="sec-title">Servicios</h2>
+  <div class="services-grid">
+    <div class="svc">
+      <div class="svc-num">01</div>
+      <div class="svc-name">Corte clásico</div>
+      <p class="svc-desc">Tijera y máquina. Limpio, definido y sin florituras. El de siempre, bien hecho.</p>
+      <div class="svc-price">$12</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">02</div>
+      <div class="svc-name">Degradado</div>
+      <p class="svc-desc">Fade bajo, medio o alto. Transición suave y bordes afilados.</p>
+      <div class="svc-price">$15</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">03</div>
+      <div class="svc-name">Arreglo de barba</div>
+      <p class="svc-desc">Perfilado, volumen y líneas limpias. Con o sin corte de cabello.</p>
+      <div class="svc-price">$8</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">04</div>
+      <div class="svc-name">Corte + barba</div>
+      <p class="svc-desc">El combo completo. Degradado o clásico más arreglo de barba.</p>
+      <div class="svc-price">$20</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">05</div>
+      <div class="svc-name">Afeitado con navaja</div>
+      <p class="svc-desc">Toalla caliente, espuma artesanal y navaja. La experiencia completa.</p>
+      <div class="svc-price">$18</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">06</div>
+      <div class="svc-name">Corte niño</div>
+      <p class="svc-desc">Para menores de 12 años. Con paciencia y sin apuro.</p>
+      <div class="svc-price">$10</div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <p class="sec-label">Sin complicaciones</p>
+  <h2 class="sec-title">Cómo reservar</h2>
+  <div class="process-list">
+    <div class="process-item">
+      <div class="process-n">1</div>
+      <div>
+        <div class="process-title">Escríbenos por WhatsApp</div>
+        <p class="process-desc">Mándanos un mensaje con tu nombre y el servicio que quieres. Respondemos en menos de 10 minutos.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">2</div>
+      <div>
+        <div class="process-title">Elige tu hora</div>
+        <p class="process-desc">Te damos las horas disponibles para ese día o el siguiente. Sin formularios largos.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">3</div>
+      <div>
+        <div class="process-title">Llega y listo</div>
+        <p class="process-desc">Preséntate en tu hora. Sin esperas, sin sorpresas en el precio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="contact-inner">
+    <div>
+      <p class="sec-label">Encuéntranos</p>
+      <h2>Ven cuando quieras.</h2>
+      <a href="https://wa.me/50700000000" class="contact-link">+507 0000-0000</a><br>
+      <a href="mailto:elcorte@ejemplo.com" class="contact-link">elcorte@ejemplo.com</a>
+      <div class="contact-info" style="margin-top:24px;">
+        <b>Av. Central, Local 4</b><br>
+        El Cangrejo, Panamá City<br>
+        <br>
+        <b>@elcortepanama</b>
+      </div>
+    </div>
+    <div class="hours">
+      <p class="sec-label">Horario</p>
+      <div class="hour-row"><span class="day">Lunes – Viernes</span><span class="time">9:00 – 20:00</span></div>
+      <div class="hour-row"><span class="day">Sábado</span><span class="time">9:00 – 18:00</span></div>
+      <div class="hour-row"><span class="day">Domingo</span><span class="time">Cerrado</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">EL<span>C</span>ORTE</div>
+  <div class="foot-copy">© 2025 El Corte Barbería · Panamá</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta Panamá — Agencia de Viajes</title>
+<meta name="description" content="Paquetes turísticos en Panamá. Bocas del Toro, San Blas, Boquete y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=DM+Sans:wght@400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ocean:#0A3D62;
+  --sky:#1A6FA8;
+  --sand:#F5EDD8;
+  --foam:#FFFFFF;
+  --ink:#0D1B2A;
+  --muted:#5A7A8A;
+  --line:#D8E8F0;
+  --accent:#E8952A;
+  --display:"Bricolage Grotesque",sans-serif;
+  --body:"DM Sans",sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--foam);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff;}
+a{color:inherit;text-decoration:none;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+  background:rgba(10,61,98,0.95);
+  backdrop-filter:blur(8px);
+}
+.nav-logo{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;letter-spacing:-0.01em;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .2s;}
+.nav-links a:hover{color:#fff;}
+.nav-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.07em;text-transform:uppercase;background:var(--accent);color:#fff;padding:10px 22px;border-radius:6px;transition:opacity .2s;}
+.nav-btn:hover{opacity:.88;}
+
+.hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,var(--ocean) 0%,var(--sky) 55%,#2A9D8F 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 48px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-pattern{
+  position:absolute;inset:0;opacity:0.06;
+  background-image:radial-gradient(circle,#fff 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:700px;}
+.hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.hero-tag::after{content:"";display:block;flex:1;height:1px;background:var(--accent);opacity:0.4;max-width:60px;}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(48px,8vw,96px);line-height:0.95;letter-spacing:-0.02em;color:#fff;}
+.hero h1 strong{font-weight:600;display:block;}
+.hero-sub{margin-top:28px;font-size:18px;color:rgba(255,255,255,.65);max-width:42ch;line-height:1.55;}
+.hero-actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn-orange{font-family:var(--display);font-size:16px;font-weight:500;background:var(--accent);color:#fff;padding:16px 36px;border-radius:8px;transition:opacity .2s;display:inline-block;}
+.btn-orange:hover{opacity:.88;}
+.btn-outline{font-family:var(--mono);font-size:12px;letter-spacing:0.07em;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.75);padding:16px 28px;border-radius:8px;transition:border-color .2s,color .2s;display:inline-block;}
+.btn-outline:hover{border-color:#fff;color:#fff;}
+
+.stats-bar{
+  display:flex;gap:0;flex-wrap:wrap;
+  background:var(--sand);border-bottom:1px solid var(--line);
+}
+.stat-b{flex:1;min-width:160px;padding:32px 40px;border-right:1px solid var(--line);}
+.stat-b:last-child{border-right:none;}
+.stat-b .n{font-family:var(--display);font-size:40px;font-weight:600;color:var(--ocean);letter-spacing:-0.02em;}
+.stat-b .l{font-size:14px;color:var(--muted);margin-top:4px;}
+
+section{padding:96px 48px;border-bottom:1px solid var(--line);}
+.sec-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.sec-title{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:500;letter-spacing:-0.02em;margin-bottom:48px;max-width:18ch;}
+
+.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pkg{border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:box-shadow .2s;}
+.pkg:hover{box-shadow:0 8px 32px rgba(10,61,98,.1);}
+.pkg-img{height:180px;display:flex;align-items:flex-end;padding:20px;}
+.pkg-img.bocas{background:linear-gradient(to bottom,#1A8FC1,#0D5E82);}
+.pkg-img.sanblas{background:linear-gradient(to bottom,#2EC4B6,#1A7A74);}
+.pkg-img.boquete{background:linear-gradient(to bottom,#4A7C59,#2D5A3D);}
+.pkg-img.panama{background:linear-gradient(to bottom,#1A3A6B,#0D2040);}
+.pkg-img.coiba{background:linear-gradient(to bottom,#0D7B5E,#064A38);}
+.pkg-img.darien{background:linear-gradient(to bottom,#5C6E2E,#3A4A1A);}
+.pkg-loc{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+.pkg-name{font-family:var(--display);font-size:24px;font-weight:500;color:#fff;margin-top:4px;}
+.pkg-body{padding:24px;}
+.pkg-desc{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:16px;}
+.pkg-meta{display:flex;justify-content:space-between;align-items:center;}
+.pkg-price{font-family:var(--display);font-size:22px;font-weight:500;color:var(--ocean);}
+.pkg-price span{font-size:13px;font-weight:400;color:var(--muted);}
+.pkg-days{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--muted);background:var(--line);padding:6px 12px;border-radius:100px;}
+
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.why-item{background:var(--foam);padding:36px 28px;}
+.why-n{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:16px;}
+.why-title{font-family:var(--display);font-size:20px;font-weight:500;margin-bottom:8px;letter-spacing:-0.01em;}
+.why-desc{font-size:14px;color:var(--muted);line-height:1.55;}
+
+.cta-section{background:var(--ocean);color:#fff;text-align:center;padding:96px 48px;}
+.cta-section h2{font-family:var(--display);font-size:clamp(36px,6vw,68px);font-weight:400;letter-spacing:-0.02em;line-height:1.05;margin-bottom:12px;}
+.cta-section h2 em{font-style:italic;color:var(--accent);}
+.cta-section p{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:36px;}
+.cta-section .btn-orange{font-size:17px;padding:18px 44px;}
+
+footer{padding:32px 48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);}
+.foot-logo{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ocean);}
+.foot-logo span{color:var(--accent);}
+.foot-copy{font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hero{padding:90px 20px 60px;}
+  section{padding:64px 20px;}
+  .packages{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr 1fr;}
+  .stat-b{padding:24px 20px;}
+  footer{padding:28px 20px;}
+  .cta-section{padding:72px 20px;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Ruta<span>Panamá</span></div>
+  <div class="nav-links">
+    <a href="#paquetes">Paquetes</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="https://wa.me/50700000000" class="nav-btn">Cotizar</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <p class="hero-tag">Agencia local · Panamá</p>
+    <h1>Descubre<br><strong>Panamá.</strong></h1>
+    <p class="hero-sub">Paquetes turísticos diseñados por panameños para quienes quieren conocer el país de verdad. Sin itinerarios genéricos.</p>
+    <div class="hero-actions">
+      <a href="#paquetes" class="btn-orange">Ver paquetes</a>
+      <a href="https://wa.me/50700000000" class="btn-outline">Hablar con un asesor</a>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-b"><div class="n">12+</div><div class="l">Destinos en Panamá</div></div>
+  <div class="stat-b"><div class="n">500+</div><div class="l">Viajeros satisfechos</div></div>
+  <div class="stat-b"><div class="n">5</div><div class="l">Años de experiencia</div></div>
+  <div class="stat-b"><div class="n">24h</div><div class="l">Soporte durante tu viaje</div></div>
+</div>
+
+<section id="paquetes">
+  <p class="sec-eyebrow">Destinos</p>
+  <h2 class="sec-title">Paquetes más populares</h2>
+  <div class="packages">
+    <div class="pkg">
+      <div class="pkg-img bocas">
+        <div><div class="pkg-loc">Bocas del Toro</div><div class="pkg-name">Islas y selva</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">Playas cristalinas, delfines, manglares y la vibra caribeña más auténtica de Centroamérica.</p>
+        <div class="pkg-meta"><div class="pkg-price">$320 <span>/ persona</span></div><span class="pkg-days">4 días</span></div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img sanblas">
+        <div><div class="pkg-loc">Guna Yala</div><div class="pkg-name">San Blas</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">Las 365 islas del archipiélago Kuna. Agua turquesa, hamacas sobre el mar y cultura indígena viva.</p>
+        <div class="pkg-meta"><div class="pkg-price">$280 <span>/ persona</span></div><span class="pkg-days">3 días</span></div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img boquete">
+        <div><div class="pkg-loc">Chiriquí</div><div class="pkg-name">Boquete</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">Montañas, café de altura y el famoso senderismo al Volcán Barú. Fresco y lejos del calor.</p>
+        <div class="pkg-meta"><div class="pkg-price">$260 <span>/ persona</span></div><span class="pkg-days">3 días</span></div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img panama">
+        <div><div class="pkg-loc">Ciudad</div><div class="pkg-name">Panamá City</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">Canal de Panamá, Casco Viejo, rascacielos y la mezcla única de historia moderna y colonial.</p>
+        <div class="pkg-meta"><div class="pkg-price">$180 <span>/ persona</span></div><span class="pkg-days">2 días</span></div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img coiba">
+        <div><div class="pkg-loc">Veraguas</div><div class="pkg-name">Isla Coiba</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">Parque Nacional Patrimonio UNESCO. Buceo de clase mundial en aguas prístinas del Pacífico.</p>
+        <div class="pkg-meta"><div class="pkg-price">$390 <span>/ persona</span></div><span class="pkg-days">4 días</span></div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img darien">
+        <div><div class="pkg-loc">Darién</div><div class="pkg-name">Selva profunda</div></div>
+      </div>
+      <div class="pkg-body">
+        <p class="pkg-desc">La selva más densa de las Américas. Aves exóticas, ríos remotos y comunidades indígenas Emberá.</p>
+        <div class="pkg-meta"><div class="pkg-price">$450 <span>/ persona</span></div><span class="pkg-days">5 días</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <p class="sec-eyebrow">Por qué elegirnos</p>
+  <h2 class="sec-title">Viajes hechos por panameños</h2>
+  <div class="why-grid">
+    <div class="why-item"><div class="why-n">01</div><h3 class="why-title">Guías locales</h3><p class="why-desc">Cada guía es del destino. Conocen los rincones que no están en ninguna guía.</p></div>
+    <div class="why-item"><div class="why-n">02</div><h3 class="why-title">Grupos pequeños</h3><p class="why-desc">Máximo 10 personas por grupo. Atención real, sin aglomeraciones.</p></div>
+    <div class="why-item"><div class="why-n">03</div><h3 class="why-title">Todo incluido</h3><p class="why-desc">Transporte, alojamiento y alimentación. Sin sorpresas al final del viaje.</p></div>
+    <div class="why-item"><div class="why-n">04</div><h3 class="why-title">Soporte 24/7</h3><p class="why-desc">Línea directa durante todo tu viaje. Estamos contigo desde que sales hasta que llegas.</p></div>
+  </div>
+</section>
+
+<div class="cta-section" id="contacto">
+  <h2>¿Listo para<br><em>explorar Panamá?</em></h2>
+  <p>Cotiza tu paquete en menos de 24 horas.</p>
+  <a href="https://wa.me/50700000000" class="btn-orange">Cotizar por WhatsApp</a>
+</div>
+
+<footer>
+  <div class="foot-logo">Ruta<span>Panamá</span></div>
+  <div class="foot-copy">© 2025 Ruta Panamá · Agencia de Viajes · Panamá City</div>
+</footer>
+
+</body>
+</html>

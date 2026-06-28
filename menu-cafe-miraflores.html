@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Miraflores — Menú</title>
+<meta name="description" content="Menú digital de Café Miraflores, Panamá.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --espresso:#1A0F00;
+  --roast:#3D1F00;
+  --crema:#F5EDD8;
+  --steam:#FAF6EE;
+  --foam:#FFFFFF;
+  --gold:#B5813A;
+  --muted:#8C7355;
+  --display:"Cormorant Garamond",serif;
+  --body:"DM Sans",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--steam);color:var(--espresso);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--gold);color:#fff;}
+a{color:inherit;text-decoration:none;}
+
+.hero{
+  background:var(--espresso);
+  color:var(--crema);
+  padding:64px 24px 48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,#3D1F00 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;}
+.hero-eyebrow{
+  font-family:var(--body);
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+}
+.hero h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(52px,14vw,88px);
+  line-height:0.92;
+  letter-spacing:-0.01em;
+  color:var(--crema);
+}
+.hero h1 span{
+  display:block;
+  font-style:italic;
+  font-weight:400;
+  font-size:0.52em;
+  letter-spacing:0.04em;
+  color:var(--gold);
+  margin-top:8px;
+}
+.hero-line{
+  width:40px;height:1px;
+  background:var(--gold);
+  margin:28px auto;
+  opacity:0.6;
+}
+.hero-meta{
+  display:flex;justify-content:center;gap:32px;flex-wrap:wrap;
+  font-size:12px;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+.tabs-bar{
+  position:sticky;top:0;z-index:40;
+  background:var(--espresso);
+  border-bottom:1px solid rgba(181,129,58,.25);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.tabs-bar::-webkit-scrollbar{display:none;}
+.tabs{
+  display:flex;
+  padding:0 16px;
+  gap:0;
+  min-width:max-content;
+}
+.tab{
+  font-family:var(--body);
+  font-size:12px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:rgba(245,237,216,.45);
+  padding:16px 20px;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+  white-space:nowrap;
+  background:none;border-top:none;border-left:none;border-right:none;
+}
+.tab:hover{color:var(--crema);}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+.content{max-width:680px;margin:0 auto;padding:0 20px 80px;}
+
+.category{padding-top:56px;}
+.cat-label{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:13px;
+  color:var(--gold);
+  letter-spacing:0.08em;
+  margin-bottom:6px;
+}
+.cat-title{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:32px;
+  letter-spacing:-0.01em;
+  color:var(--espresso);
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(26,15,0,.1);
+  margin-bottom:8px;
+}
+
+.item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 20px;
+  padding:20px 0;
+  border-bottom:1px solid rgba(26,15,0,.07);
+  align-items:start;
+}
+.item:last-child{border-bottom:none;}
+.item-name{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:20px;
+  line-height:1.2;
+  color:var(--espresso);
+}
+.item-desc{
+  grid-column:1;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:3px;
+  line-height:1.5;
+}
+.item-price{
+  font-family:var(--body);
+  font-size:15px;
+  font-weight:500;
+  color:var(--gold);
+  white-space:nowrap;
+  padding-top:3px;
+}
+.item-tag{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  background:var(--crema);
+  color:var(--muted);
+  padding:2px 8px;
+  border-radius:100px;
+  margin-top:6px;
+}
+
+.divider{
+  height:1px;
+  background:rgba(26,15,0,.08);
+  margin:8px 0;
+}
+
+.footer-note{
+  text-align:center;
+  padding:40px 20px 32px;
+  font-size:12px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border-top:1px solid rgba(26,15,0,.08);
+  max-width:680px;
+  margin:0 auto;
+}
+.footer-note strong{
+  display:block;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:0.01em;
+  text-transform:none;
+  color:var(--espresso);
+  margin-bottom:8px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Desde 2019 · Casco Viejo, Panamá</p>
+    <h1>Café<span>Miraflores</span></h1>
+    <div class="hero-line"></div>
+    <div class="hero-meta">
+      <span>Lun – Vie 7:00 – 20:00</span>
+      <span>Sáb – Dom 8:00 – 21:00</span>
+      <span>Wi-Fi disponible</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-bar">
+  <div class="tabs">
+    <button class="tab active" onclick="scrollTo('cafes')">Cafés</button>
+    <button class="tab" onclick="scrollTo('frios')">Fríos</button>
+    <button class="tab" onclick="scrollTo('comidas')">Comidas</button>
+    <button class="tab" onclick="scrollTo('postres')">Postres</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="category" id="cafes">
+    <p class="cat-label">Para despertar</p>
+    <h2 class="cat-title">Cafés calientes</h2>
+
+    <div class="item">
+      <div class="item-name">Espresso</div>
+      <div class="item-price">$1.75</div>
+      <div class="item-desc">Doble extracción de café panameño de altura. Concentrado y limpio.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Americano</div>
+      <div class="item-price">$2.25</div>
+      <div class="item-desc">Espresso con agua caliente. Suave y largo.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Cappuccino</div>
+      <div class="item-price">$3.25</div>
+      <div class="item-desc">Espresso, leche vaporizada y espuma sedosa a partes iguales.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Latte</div>
+      <div class="item-price">$3.50</div>
+      <div class="item-desc">Espresso suave con abundante leche vaporizada. Ideal para el día a día.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Flat White</div>
+      <div class="item-price">$3.75</div>
+      <div class="item-desc">Doble espresso con microespuma bien integrada. Intenso pero cremoso.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Café de olla</div>
+      <div class="item-price">$2.75</div>
+      <div class="item-desc">Receta de la casa: café filtrado con canela y panela. Servido en barro.</div>
+      <span class="item-tag">Especial</span>
+    </div>
+  </div>
+
+  <div class="category" id="frios">
+    <p class="cat-label">Para refrescarse</p>
+    <h2 class="cat-title">Bebidas frías</h2>
+
+    <div class="item">
+      <div class="item-name">Cold Brew</div>
+      <div class="item-price">$3.75</div>
+      <div class="item-desc">Café extraído en frío durante 18 horas. Suave, sin acidez.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Iced Latte</div>
+      <div class="item-price">$3.50</div>
+      <div class="item-desc">Espresso sobre hielo con leche fría. Simple y directo.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Miraflores Tonic</div>
+      <div class="item-price">$4.25</div>
+      <div class="item-desc">Espresso, agua tónica, naranja y hielo. La firma de la casa.</div>
+      <span class="item-tag">Firma</span>
+    </div>
+    <div class="item">
+      <div class="item-name">Granizado de café</div>
+      <div class="item-price">$3.25</div>
+      <div class="item-desc">Cold brew congelado y batido. Denso y refrescante.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Limonada de coco</div>
+      <div class="item-price">$3.00</div>
+      <div class="item-desc">Sin café. Limón, agua de coco y menta. Perfecta para el calor.</div>
+    </div>
+  </div>
+
+  <div class="category" id="comidas">
+    <p class="cat-label">Para acompañar</p>
+    <h2 class="cat-title">Comidas</h2>
+
+    <div class="item">
+      <div class="item-name">Tostada de aguacate</div>
+      <div class="item-price">$6.50</div>
+      <div class="item-desc">Pan artesanal, aguacate, tomate cherry, semillas y aceite de oliva.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Sándwich de pollo</div>
+      <div class="item-price">$7.50</div>
+      <div class="item-desc">Pollo a la plancha, lechuga, tomate y mayonesa de chipotle. Pan ciabatta.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Bowl de granola</div>
+      <div class="item-price">$5.75</div>
+      <div class="item-desc">Granola artesanal, yogur griego, fruta de temporada y miel.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Quiche del día</div>
+      <div class="item-price">$6.00</div>
+      <div class="item-desc">Preparación del día. Consulta con el barista.</div>
+    </div>
+  </div>
+
+  <div class="category" id="postres">
+    <p class="cat-label">Para terminar bien</p>
+    <h2 class="cat-title">Postres</h2>
+
+    <div class="item">
+      <div class="item-name">Brownie de espresso</div>
+      <div class="item-price">$3.50</div>
+      <div class="item-desc">Chocolate oscuro con espresso. Denso, húmedo. Hecho en casa.</div>
+      <span class="item-tag">Más pedido</span>
+    </div>
+    <div class="item">
+      <div class="item-name">Cheesecake de maracuyá</div>
+      <div class="item-price">$4.25</div>
+      <div class="item-desc">Base de galleta, crema de queso y coulis de maracuyá panameño.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Croissant de mantequilla</div>
+      <div class="item-price">$2.75</div>
+      <div class="item-desc">Horneado cada mañana. Crujiente por fuera, suave por dentro.</div>
+    </div>
+    <div class="item">
+      <div class="item-name">Galleta de canela</div>
+      <div class="item-price">$1.75</div>
+      <div class="item-desc">Receta de la abuela. Perfecta con el café de olla.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  <strong>Café Miraflores</strong>
+  Calle 1a, Casco Viejo · Panamá · @cafemiraflores<br><br>
+  Precios en USD · Incluye impuesto · Sujeto a disponibilidad
+</div>
+
+<script>
+function scrollTo(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const offset=document.querySelector('.tabs-bar').offsetHeight;
+  const top=el.getBoundingClientRect().top+window.scrollY-offset-16;
+  window.scrollTo({top,behavior:'smooth'});
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+const cats=document.querySelectorAll('.category');
+const tabs=document.querySelectorAll('.tab');
+const bar=document.querySelector('.tabs-bar');
+window.addEventListener('scroll',()=>{
+  let current='';
+  cats.forEach(c=>{
+    const top=c.getBoundingClientRect().top;
+    if(top<=bar.offsetHeight+40) current=c.id;
+  });
+  if(current){
+    tabs.forEach(t=>{
+      t.classList.toggle('active',t.getAttribute('onclick').includes(current));
+    });
+  }
+},{passive:true});
+</script>
+</body>
+</html>

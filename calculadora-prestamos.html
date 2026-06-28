@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de préstamos</title>
+<meta name="description" content="Calcula tu cuota mensual, interés total y tabla de amortización al instante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=DM+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2ED;
+  --surface:#FFFFFF;
+  --ink:#141210;
+  --muted:#7A7670;
+  --line:#E2DFD8;
+  --accent:#1A56DB;
+  --accent-bg:#EEF3FD;
+  --success:#0F7B3E;
+  --success-bg:#EDFAF3;
+  --display:"Bricolage Grotesque",sans-serif;
+  --body:"DM Sans",sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;min-height:100vh;}
+::selection{background:var(--accent);color:#fff;}
+
+.page{max-width:960px;margin:0 auto;padding:48px 24px 80px;}
+
+.page-header{text-align:center;margin-bottom:48px;}
+.page-header .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.page-header h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:500;letter-spacing:-0.02em;color:var(--ink);}
+.page-header p{margin-top:12px;font-size:16px;color:var(--muted);max-width:44ch;margin-left:auto;margin-right:auto;}
+
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px;}
+.card-title{font-family:var(--display);font-size:18px;font-weight:500;margin-bottom:28px;letter-spacing:-0.01em;}
+
+.field{margin-bottom:24px;}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:0.02em;}
+.field-wrap{position:relative;}
+.field-prefix{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:14px;color:var(--muted);pointer-events:none;
+}
+.field-suffix{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:14px;color:var(--muted);pointer-events:none;
+}
+input[type="number"]{
+  width:100%;border:1px solid var(--line);border-radius:10px;
+  padding:13px 40px 13px 36px;
+  font-family:var(--mono);font-size:16px;color:var(--ink);
+  background:var(--bg);
+  transition:border-color .2s;outline:none;
+  -moz-appearance:textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input[type="number"]:focus{border-color:var(--accent);}
+input[type="number"].no-prefix{padding-left:14px;}
+
+.range-wrap{margin-top:10px;}
+input[type="range"]{
+  width:100%;height:4px;
+  background:var(--line);border-radius:2px;
+  outline:none;cursor:pointer;
+  -webkit-appearance:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--accent);
+  border:2px solid #fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.range-labels{display:flex;justify-content:space-between;margin-top:6px;}
+.range-labels span{font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+.result-card{
+  background:var(--accent);border-radius:16px;padding:32px;color:#fff;
+  margin-bottom:24px;
+}
+.result-card .rc-label{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:.7;margin-bottom:8px;}
+.result-card .rc-value{font-family:var(--display);font-size:clamp(36px,5vw,52px);font-weight:500;letter-spacing:-0.02em;}
+.result-card .rc-sub{font-size:14px;opacity:.7;margin-top:6px;}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px;}
+.stat .s-label{font-family:var(--mono);font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.stat .s-value{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-0.01em;}
+.stat.highlight{background:var(--success-bg);border-color:rgba(15,123,62,.15);}
+.stat.highlight .s-value{color:var(--success);}
+
+.bar-wrap{margin-bottom:24px;}
+.bar-label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:var(--muted);}
+.bar-track{height:8px;background:var(--line);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .4s ease;}
+.bar-fill.interest{background:#E05A2B;}
+
+.table-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:24px;}
+.table-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line);}
+.table-head h3{font-family:var(--display);font-size:17px;font-weight:500;}
+.table-toggle{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--accent);cursor:pointer;background:var(--accent-bg);border:none;padding:8px 14px;border-radius:8px;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:var(--bg);}
+th{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:right;font-weight:400;}
+th:first-child{text-align:left;}
+td{padding:11px 16px;text-align:right;font-family:var(--mono);font-size:13px;border-top:1px solid var(--line);}
+td:first-child{text-align:left;color:var(--muted);}
+td.principal{color:var(--accent);}
+td.interest{color:#E05A2B;}
+tr:hover td{background:var(--bg);}
+
+@media(max-width:700px){
+  .layout{grid-template-columns:1fr;}
+  .stats{grid-template-columns:1fr 1fr;}
+  th,td{padding:10px 10px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <p class="eyebrow">Herramienta financiera</p>
+    <h1>Calculadora de préstamos</h1>
+    <p>Conoce tu cuota mensual y el costo total de tu crédito al instante.</p>
+  </div>
+
+  <div class="layout">
+    <div class="card">
+      <div class="card-title">Datos del préstamo</div>
+
+      <div class="field">
+        <label>Monto del préstamo</label>
+        <div class="field-wrap">
+          <span class="field-prefix">$</span>
+          <input type="number" id="amount" value="10000" min="500" max="500000" step="500">
+        </div>
+        <div class="range-wrap">
+          <input type="range" id="amount-range" min="500" max="100000" step="500" value="10000">
+          <div class="range-labels"><span>$500</span><span>$100,000</span></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tasa de interés anual</label>
+        <div class="field-wrap">
+          <input type="number" id="rate" value="8.5" min="0.1" max="50" step="0.1" class="no-prefix" style="padding-right:40px;">
+          <span class="field-suffix">%</span>
+        </div>
+        <div class="range-wrap">
+          <input type="range" id="rate-range" min="0.1" max="30" step="0.1" value="8.5">
+          <div class="range-labels"><span>0.1%</span><span>30%</span></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Plazo en años</label>
+        <div class="field-wrap">
+          <input type="number" id="years" value="5" min="1" max="30" step="1" class="no-prefix">
+        </div>
+        <div class="range-wrap">
+          <input type="range" id="years-range" min="1" max="30" step="1" value="5">
+          <div class="range-labels"><span>1 año</span><span>30 años</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="result-card">
+        <div class="rc-label">Cuota mensual</div>
+        <div class="rc-value" id="monthly">$0.00</div>
+        <div class="rc-sub" id="monthly-sub">—</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="s-label">Total a pagar</div>
+          <div class="s-value" id="total">$0</div>
+        </div>
+        <div class="stat highlight">
+          <div class="s-label">Interés total</div>
+          <div class="s-value" id="interest">$0</div>
+        </div>
+        <div class="stat">
+          <div class="s-label">Cuotas</div>
+          <div class="s-value" id="payments">0</div>
+        </div>
+        <div class="stat">
+          <div class="s-label">Tasa mensual</div>
+          <div class="s-value" id="monthly-rate">0%</div>
+        </div>
+      </div>
+
+      <div class="bar-wrap card" style="padding:20px 24px;">
+        <div class="bar-label"><span>Capital</span><span id="pct-capital">0%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="bar-capital" style="width:0%"></div></div>
+        <div class="bar-label" style="margin-top:12px;"><span>Intereses</span><span id="pct-interest">0%</span></div>
+        <div class="bar-track"><div class="bar-fill interest" id="bar-interest" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-head">
+      <h3>Tabla de amortización</h3>
+      <button class="table-toggle" id="toggle-btn" onclick="toggleTable()">Ver tabla completa</button>
+    </div>
+    <div id="table-wrap" style="max-height:320px;overflow:hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th>Cuota</th>
+            <th>Capital</th>
+            <th>Interés</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody id="amort-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<script>
+const fmt=n=>n.toLocaleString('es-PA',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtShort=n=>{if(n>=1000)return '$'+Math.round(n/100)/10+'k';return fmt(n);};
+
+function calc(){
+  const P=parseFloat(document.getElementById('amount').value)||0;
+  const annualRate=parseFloat(document.getElementById('rate').value)||0;
+  const years=parseInt(document.getElementById('years').value)||0;
+  const r=annualRate/100/12;
+  const n=years*12;
+
+  let monthly=0;
+  if(r===0){monthly=P/n;}
+  else{monthly=P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);}
+
+  const total=monthly*n;
+  const interest=total-P;
+  const pctCapital=Math.round((P/total)*100);
+  const pctInterest=100-pctCapital;
+
+  document.getElementById('monthly').textContent=fmt(monthly);
+  document.getElementById('monthly-sub').textContent=n+' cuotas de '+fmt(monthly);
+  document.getElementById('total').textContent=fmtShort(total);
+  document.getElementById('interest').textContent=fmtShort(interest);
+  document.getElementById('payments').textContent=n;
+  document.getElementById('monthly-rate').textContent=(annualRate/12).toFixed(3)+'%';
+  document.getElementById('pct-capital').textContent=pctCapital+'%';
+  document.getElementById('pct-interest').textContent=pctInterest+'%';
+  document.getElementById('bar-capital').style.width=pctCapital+'%';
+  document.getElementById('bar-interest').style.width=pctInterest+'%';
+
+  let balance=P;
+  let rows='';
+  for(let i=1;i<=n;i++){
+    const int=balance*r;
+    const prin=monthly-int;
+    balance=Math.max(0,balance-prin);
+    rows+=`<tr>
+      <td>${i}</td>
+      <td class="principal">${fmt(prin)}</td>
+      <td class="interest">${fmt(int)}</td>
+      <td>${fmt(balance)}</td>
+    </tr>`;
+  }
+  document.getElementById('amort-body').innerHTML=rows;
+}
+
+let tableOpen=false;
+function toggleTable(){
+  tableOpen=!tableOpen;
+  document.getElementById('table-wrap').style.maxHeight=tableOpen?'none':'320px';
+  document.getElementById('toggle-btn').textContent=tableOpen?'Ocultar tabla':'Ver tabla completa';
+}
+
+function sync(inputId,rangeId){
+  const input=document.getElementById(inputId);
+  const range=document.getElementById(rangeId);
+  input.addEventListener('input',()=>{range.value=input.value;calc();});
+  range.addEventListener('input',()=>{input.value=range.value;calc();});
+}
+sync('amount','amount-range');
+sync('rate','rate-range');
+sync('years','years-range');
+calc();
+</script>
+</body>
+</html>
