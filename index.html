@@ -70,18 +70,17 @@ section{padding:88px 0;border-bottom:1px solid var(--line);}
 .service h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:10px;letter-spacing:-0.01em;}
 .service p{font-size:14px;color:var(--muted);line-height:1.55;}
 
-.project{display:grid;grid-template-columns:52px 1fr auto;gap:24px;align-items:start;padding:36px 0;border-top:1px solid var(--line);transition:background .2s,padding .2s,margin .2s;cursor:default;}
+.project{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:start;padding:32px 0;border-top:1px solid var(--line);transition:background .2s,padding .2s,margin .2s;}
 .project:hover{background:#F3F1EA;padding-left:12px;padding-right:12px;margin-left:-12px;margin-right:-12px;}
 .project:last-child{border-bottom:1px solid var(--line);}
-.project .num{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:7px;}
-.project h3{font-family:var(--display);font-weight:500;font-size:28px;letter-spacing:-0.01em;margin-bottom:8px;}
-.project .desc{color:var(--muted);max-width:54ch;font-size:16px;}
-.project .stack{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;}
-.tag{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:4px 12px;}
-.project .link{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap;padding-top:7px;letter-spacing:0.04em;}
-.project .link span{border-bottom:1px solid transparent;transition:border-color .2s;}
-.project:hover .link span{border-color:var(--accent);}
-
+.project .num{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:5px;}
+.project h3{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-0.01em;margin-bottom:6px;}
+.project .desc{color:var(--muted);font-size:15px;max-width:52ch;line-height:1.55;}
+.project .stack{margin-top:12px;display:flex;gap:7px;flex-wrap:wrap;}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 11px;}
+.project .proj-link{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap;padding-top:5px;letter-spacing:0.04em;}
+.project .proj-link span{border-bottom:1px solid transparent;transition:border-color .2s;}
+.project:hover .proj-link span{border-color:var(--accent);}
 .about{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
 .about p{font-size:19px;line-height:1.65;}
 .about p+p{margin-top:20px;}
@@ -116,7 +115,7 @@ footer{padding:36px 0;}
   .about{grid-template-columns:1fr;gap:36px;}
   .contact-inner{grid-template-columns:1fr;gap:40px;}
   .project{grid-template-columns:36px 1fr;}
-  .project .link{grid-column:2;}
+  .project .proj-link{grid-column:2;}
   .project:hover{padding-left:0;padding-right:0;margin-left:0;margin-right:0;}
 }
 @media(max-width:480px){
@@ -194,22 +193,22 @@ footer{padding:36px 0;}
     </div>
     <div class="services reveal">
       <div class="service">
-        <div class="ico">S/01</div>
+        <div class="ico">Disponible</div>
         <h3>Sitios web</h3>
         <p>Página de presentación, portafolio o negocio. Responsivo, rápido y listo para Google.</p>
       </div>
       <div class="service">
-        <div class="ico">S/02</div>
+        <div class="ico">Disponible</div>
         <h3>Aplicaciones</h3>
         <p>Software de escritorio en Windows para gestionar ventas, inventario o cualquier proceso de tu negocio.</p>
       </div>
       <div class="service">
-        <div class="ico">S/03</div>
+        <div class="ico" style="color:var(--muted)">No disponible aún</div>
         <h3>Bases de datos</h3>
         <p>Diseño, organización y consultas con Oracle y SQL para que tu negocio tenga información ordenada.</p>
       </div>
       <div class="service">
-        <div class="ico">S/04</div>
+        <div class="ico">Disponible</div>
         <h3>Menús digitales</h3>
         <p>Carta digital con código QR para restaurantes y cafés. El cliente escanea y ve el menú al instante.</p>
       </div>
@@ -227,43 +226,61 @@ footer{padding:36px 0;}
     <div class="project reveal">
       <div class="num">01</div>
       <div>
-        <h3>Sistema de gestión de ventas</h3>
-        <p class="desc">Aplicación de escritorio para administrar las ventas de un negocio: registro de pedidos, control de productos y generación de reportes.</p>
-        <div class="stack">
-          <span class="tag">C#</span>
-          <span class="tag">Windows Forms</span>
-          <span class="tag">.NET</span>
-        </div>
+        <h3>Menú digital — Café Miraflores</h3>
+        <p class="desc">Carta digital con categorías y navegación fija para un café en el Casco Viejo de Panamá. Abre desde cualquier celular al escanear un QR.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
       </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
+      <a class="proj-link" href="https://kevinwso.github.io/menu-cafe-miraflores.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
     </div>
 
     <div class="project reveal">
       <div class="num">02</div>
       <div>
-        <h3>Menú digital con código QR</h3>
-        <p class="desc">Carta digital responsiva para restaurantes y cafés. Los clientes la abren escaneando un QR desde la mesa. Actualizable en minutos.</p>
-        <div class="stack">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
+        <h3>Landing page — Barbería El Corte</h3>
+        <p class="desc">Página oscura con ticker animado, lista de servicios con precios y botón de reserva por WhatsApp para una barbería en Panamá City.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
       </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
+      <a class="proj-link" href="https://kevinwso.github.io/barberia-elcorte.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
     </div>
 
     <div class="project reveal">
       <div class="num">03</div>
       <div>
-        <h3>Portafolio web</h3>
-        <p class="desc">Sitio personal diseñado desde cero para presentar servicios y captar clientes. Minimalista, carga rápida y optimizado para móvil.</p>
-        <div class="stack">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
+        <h3>Calculadora de préstamos</h3>
+        <p class="desc">Herramienta financiera interactiva: calcula cuota mensual, interés total y genera tabla de amortización completa con sliders en tiempo real.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
       </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
+      <a class="proj-link" href="https://kevinwso.github.io/calculadora-prestamos.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">04</div>
+      <div>
+        <h3>Página de links — KW Dev</h3>
+        <p class="desc">Página centralizada de enlaces profesionales con diseño propio. Alternativa a Linktree con identidad de marca personalizada.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/links-kwdev.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">05</div>
+      <div>
+        <h3>Reservas online — Studio Lumé</h3>
+        <p class="desc">Página de reservas para salón de belleza con formulario funcional que envía los datos directamente por WhatsApp al confirmar.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/salon-belleza-reservas.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">06</div>
+      <div>
+        <h3>Landing page — Ruta Panamá</h3>
+        <p class="desc">Sitio de turismo con 6 destinos, estadísticas animadas, sección de por qué elegirnos y CTA de cotización por WhatsApp.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/agencia-viajes-ruta.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
     </div>
 
   </div>
