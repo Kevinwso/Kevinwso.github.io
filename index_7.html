@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KW Dev — Kevin Williams</title>
+<meta name="description" content="Desarrollo web, aplicaciones y bases de datos. Freelancer en Panamá.">
+<meta property="og:title" content="KW Dev — Kevin Williams">
+<meta property="og:description" content="Desarrollo web, aplicaciones y bases de datos. Freelancer en Panamá.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Hanken+Grotesk:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF7;
+  --ink:#14130E;
+  --muted:#75736A;
+  --line:#E4E2DA;
+  --accent:#2845C7;
+  --display:"Bricolage Grotesque",sans-serif;
+  --body:"Hanken Grotesk",sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 36px;}
+
+header{position:sticky;top:0;z-index:50;background:rgba(251,250,247,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.topbar{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{font-family:var(--mono);font-weight:700;font-size:15px;background:var(--ink);color:var(--paper);padding:6px 10px;letter-spacing:0.04em;}
+.brand-sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:0.06em;}
+nav{display:flex;gap:28px;}
+nav a{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;color:var(--muted);transition:color .2s;}
+nav a:hover{color:var(--ink);}
+.clock{font-family:var(--mono);font-size:12px;color:var(--muted);}
+
+.hero{padding:0;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 80% 30%,#DDEAFE 0%,transparent 65%),radial-gradient(ellipse 40% 50% at 10% 80%,#EEF1FB 0%,transparent 60%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;padding:80px 0 72px;}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(52px,8.5vw,108px);line-height:0.96;letter-spacing:-0.03em;color:var(--ink);}
+.hero h1 em{font-style:normal;font-weight:600;color:var(--accent);}
+.hero-tagline{margin-top:36px;font-size:18px;color:var(--muted);max-width:36ch;line-height:1.5;}
+.hero-cta{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-primary{font-family:var(--mono);font-size:13px;letter-spacing:0.05em;background:var(--ink);color:var(--paper);padding:14px 28px;border:none;cursor:pointer;transition:opacity .2s;display:inline-block;}
+.btn-primary:hover{opacity:.82;}
+.btn-ghost{font-family:var(--mono);font-size:13px;letter-spacing:0.05em;color:var(--muted);padding:14px 0;border:none;background:none;cursor:pointer;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s;}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink);}
+
+.hero-bar{position:relative;z-index:1;padding:22px 0;display:flex;align-items:center;gap:40px;border-top:1px solid var(--line);flex-wrap:wrap;}
+.hero-bar-item{display:flex;flex-direction:column;}
+.hero-bar-item .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.hero-bar-item .val{font-family:var(--mono);font-size:13px;color:var(--ink);margin-top:3px;display:flex;align-items:center;gap:7px;}
+.dot{width:7px;height:7px;border-radius:50%;background:#22C55E;display:inline-block;box-shadow:0 0 0 3px rgba(34,197,94,.18);flex-shrink:0;}
+
+section{padding:88px 0;border-bottom:1px solid var(--line);}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:52px;}
+.sec-num{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;color:var(--muted);}
+.sec-head h2{font-family:var(--display);font-weight:500;font-size:30px;letter-spacing:-0.01em;}
+
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.service{background:var(--paper);padding:36px 28px;transition:background .2s;}
+.service:hover{background:#F3F1EA;}
+.service .ico{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:20px;letter-spacing:0.05em;}
+.service h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:10px;letter-spacing:-0.01em;}
+.service p{font-size:14px;color:var(--muted);line-height:1.55;}
+
+.project{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:start;padding:32px 0;border-top:1px solid var(--line);transition:background .2s,padding .2s,margin .2s;}
+.project:hover{background:#F3F1EA;padding-left:12px;padding-right:12px;margin-left:-12px;margin-right:-12px;}
+.project:last-child{border-bottom:1px solid var(--line);}
+.project .num{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:5px;}
+.project h3{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-0.01em;margin-bottom:6px;}
+.project .desc{color:var(--muted);font-size:15px;max-width:52ch;line-height:1.55;}
+.project .stack{margin-top:12px;display:flex;gap:7px;flex-wrap:wrap;}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 11px;}
+.project .proj-link{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap;padding-top:5px;letter-spacing:0.04em;}
+.project .proj-link span{border-bottom:1px solid transparent;transition:border-color .2s;}
+.project:hover .proj-link span{border-color:var(--accent);}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.about p{font-size:19px;line-height:1.65;}
+.about p+p{margin-top:20px;}
+.about .side{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:2.1;}
+.about .side b{color:var(--ink);font-weight:400;}
+.about .side .lbl{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:block;}
+
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.contact-inner h2{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,54px);letter-spacing:-0.02em;line-height:1.08;}
+.email-link{display:inline-block;margin-top:28px;font-family:var(--mono);font-size:15px;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:opacity .2s;}
+.email-link:hover{opacity:.7;}
+.socials{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
+.socials a{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;color:var(--muted);border:1px solid var(--line);padding:10px 18px;transition:color .2s,border-color .2s;}
+.socials a:hover{color:var(--ink);border-color:var(--ink);}
+.process{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:2.2;padding-top:8px;}
+.process .lbl{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;}
+.process b{color:var(--ink);font-weight:400;}
+
+footer{padding:36px 0;}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.foot span{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--muted);}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:800px){
+  .wrap{padding:0 22px;}
+  nav{display:none;}
+  .hero{min-height:auto;}
+  .hero-inner{padding:72px 0 56px;}
+  .services{grid-template-columns:1fr 1fr;}
+  .about{grid-template-columns:1fr;gap:36px;}
+  .contact-inner{grid-template-columns:1fr;gap:40px;}
+  .project{grid-template-columns:36px 1fr;}
+  .project .proj-link{grid-column:2;}
+  .project:hover{padding-left:0;padding-right:0;margin-left:0;margin-right:0;}
+}
+@media(max-width:480px){
+  .services{grid-template-columns:1fr;}
+  .hero h1{font-size:clamp(42px,12vw,70px);}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <a href="#top" class="brand">
+      <span class="brand-logo">KW</span>
+      <span class="brand-sub">DEV</span>
+    </a>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#trabajo">Trabajo</a>
+      <a href="#sobre">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <span class="clock" id="clock">--:--</span>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner reveal">
+    <h1>Código<br>que<br><em>funciona.</em></h1>
+    <p class="hero-tagline">
+      Sitios web, aplicaciones y bases de datos hechos a tu medida. Sin rodeos, sin demoras.
+    </p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-primary">Habla conmigo</a>
+      <a href="#trabajo" class="btn-ghost">Ver proyectos →</a>
+    </div>
+  </div>
+
+  <div class="wrap hero-bar">
+    <div class="hero-bar-item">
+      <span class="lbl">Estado</span>
+      <span class="val"><span class="dot"></span>Disponible</span>
+    </div>
+    <div class="hero-bar-item">
+      <span class="lbl">Desarrollador</span>
+      <span class="val">Kevin Williams</span>
+    </div>
+    <div class="hero-bar-item">
+      <span class="lbl">Base</span>
+      <span class="val">Panamá, Panamá</span>
+    </div>
+    <div class="hero-bar-item">
+      <span class="lbl">Especialidad</span>
+      <span class="val">Web · Apps · Bases de datos</span>
+    </div>
+    <div class="hero-bar-item">
+      <span class="lbl">Respuesta</span>
+      <span class="val">Menos de 24 h</span>
+    </div>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2>Lo que puedo hacer por ti</h2>
+    </div>
+    <div class="services reveal">
+      <div class="service">
+        <div class="ico">Disponible</div>
+        <h3>Sitios web</h3>
+        <p>Página de presentación, portafolio o negocio. Responsivo, rápido y listo para Google.</p>
+      </div>
+      <div class="service">
+        <div class="ico">Disponible</div>
+        <h3>Aplicaciones</h3>
+        <p>Software de escritorio en Windows para gestionar ventas, inventario o cualquier proceso de tu negocio.</p>
+      </div>
+      <div class="service">
+        <div class="ico" style="color:var(--muted)">No disponible aún</div>
+        <h3>Bases de datos</h3>
+        <p>Diseño, organización y consultas con Oracle y SQL para que tu negocio tenga información ordenada.</p>
+      </div>
+      <div class="service">
+        <div class="ico">Disponible</div>
+        <h3>Menús digitales</h3>
+        <p>Carta digital con código QR para restaurantes y cafés. El cliente escanea y ve el menú al instante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trabajo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2>Trabajo seleccionado</h2>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">01</div>
+      <div>
+        <h3>Menú digital — Café Miraflores</h3>
+        <p class="desc">Carta digital con categorías y navegación fija para un café en el Casco Viejo de Panamá. Abre desde cualquier celular al escanear un QR.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/menu-cafe-miraflores.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">02</div>
+      <div>
+        <h3>Landing page — Barbería El Corte</h3>
+        <p class="desc">Página oscura con ticker animado, lista de servicios con precios y botón de reserva por WhatsApp para una barbería en Panamá City.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/barberia-elcorte.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">03</div>
+      <div>
+        <h3>Calculadora de préstamos</h3>
+        <p class="desc">Herramienta financiera interactiva: calcula cuota mensual, interés total y genera tabla de amortización completa con sliders en tiempo real.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/calculadora-prestamos.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">04</div>
+      <div>
+        <h3>Página de links — KW Dev</h3>
+        <p class="desc">Página centralizada de enlaces profesionales con diseño propio. Alternativa a Linktree con identidad de marca personalizada.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/links-kwdev.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">05</div>
+      <div>
+        <h3>Reservas online — Studio Lumé</h3>
+        <p class="desc">Página de reservas para salón de belleza con formulario funcional que envía los datos directamente por WhatsApp al confirmar.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/salon-belleza-reservas.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">06</div>
+      <div>
+        <h3>Landing page — Ruta Panamá</h3>
+        <p class="desc">Sitio de turismo con 6 destinos, estadísticas animadas, sección de por qué elegirnos y CTA de cotización por WhatsApp.</p>
+        <div class="stack"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <a class="proj-link" href="https://kevinwso.github.io/agencia-viajes-ruta.html" target="_blank" rel="noopener"><span>Ver proyecto →</span></a>
+    </div>
+
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2>Sobre mí</h2>
+    </div>
+    <div class="about reveal">
+      <div>
+        <p>Soy Kevin Williams, desarrollador freelancer y estudiante de Ingeniería de Sistemas en la Universidad Tecnológica de Panamá.</p>
+        <p>Convierto ideas en productos digitales que funcionan. Trabajo de forma directa: escucho lo que necesitas, lo construyo y te lo entrego listo para usar.</p>
+      </div>
+      <div class="side">
+        <span class="lbl">Herramientas</span>
+        <b>C# · .NET</b><br>
+        <b>HTML · CSS · JavaScript</b><br>
+        <b>Oracle · SQL</b><br>
+        <b>Git</b><br><br>
+        <span class="lbl">Idiomas</span>
+        <b>Español — nativo</b><br>
+        <b>Inglés — técnico</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2>Contacto</h2>
+    </div>
+    <div class="contact-inner reveal">
+      <div>
+        <h2>¿Tienes un proyecto? Hablemos hoy.</h2>
+        <a class="email-link" href="mailto:kw07701@gmail.com">kw07701@gmail.com</a>
+        <div class="socials">
+          <a href="https://github.com/Kevinwso" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/kevin-williams-3693153b2/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://wa.me/50762623954" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="process">
+        <span class="lbl">Proceso de trabajo</span>
+        <b>01 — Cuéntame tu idea</b><br>
+        <b>02 — Te envío una propuesta</b><br>
+        <b>03 — Arrancamos en 48 h</b><br>
+        <b>04 — Entrega sin sorpresas</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year"></span> KW Dev · Kevin Williams</span>
+    <span>Panamá, Panamá</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+function tick(){
+  const d=new Date();
+  const h=String(d.getHours()).padStart(2,'0');
+  const m=String(d.getMinutes()).padStart(2,'0');
+  const el=document.getElementById('clock');
+  if(el) el.textContent=h+':'+m+' PTY';
+}
+tick();setInterval(tick,30000);
+document.getElementById('year').textContent=new Date().getFullYear();
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
