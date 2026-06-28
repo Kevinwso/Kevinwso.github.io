@@ -70,18 +70,6 @@ section{padding:88px 0;border-bottom:1px solid var(--line);}
 .service h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:10px;letter-spacing:-0.01em;}
 .service p{font-size:14px;color:var(--muted);line-height:1.55;}
 
-.project{display:grid;grid-template-columns:52px 1fr auto;gap:24px;align-items:start;padding:36px 0;border-top:1px solid var(--line);transition:background .2s,padding .2s,margin .2s;cursor:default;}
-.project:hover{background:#F3F1EA;padding-left:12px;padding-right:12px;margin-left:-12px;margin-right:-12px;}
-.project:last-child{border-bottom:1px solid var(--line);}
-.project .num{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:7px;}
-.project h3{font-family:var(--display);font-weight:500;font-size:28px;letter-spacing:-0.01em;margin-bottom:8px;}
-.project .desc{color:var(--muted);max-width:54ch;font-size:16px;}
-.project .stack{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;}
-.tag{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:4px 12px;}
-.project .link{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap;padding-top:7px;letter-spacing:0.04em;}
-.project .link span{border-bottom:1px solid transparent;transition:border-color .2s;}
-.project:hover .link span{border-color:var(--accent);}
-
 .about{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
 .about p{font-size:19px;line-height:1.65;}
 .about p+p{margin-top:20px;}
@@ -115,9 +103,6 @@ footer{padding:36px 0;}
   .services{grid-template-columns:1fr 1fr;}
   .about{grid-template-columns:1fr;gap:36px;}
   .contact-inner{grid-template-columns:1fr;gap:40px;}
-  .project{grid-template-columns:36px 1fr;}
-  .project .link{grid-column:2;}
-  .project:hover{padding-left:0;padding-right:0;margin-left:0;margin-right:0;}
 }
 @media(max-width:480px){
   .services{grid-template-columns:1fr;}
@@ -139,7 +124,6 @@ footer{padding:36px 0;}
     </a>
     <nav>
       <a href="#servicios">Servicios</a>
-      <a href="#trabajo">Trabajo</a>
       <a href="#sobre">Sobre mí</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -158,7 +142,7 @@ footer{padding:36px 0;}
     </p>
     <div class="hero-cta">
       <a href="#contacto" class="btn-primary">Habla conmigo</a>
-      <a href="#trabajo" class="btn-ghost">Ver proyectos →</a>
+      <a href="#servicios" class="btn-ghost">Ver servicios →</a>
     </div>
   </div>
 
@@ -194,22 +178,22 @@ footer{padding:36px 0;}
     </div>
     <div class="services reveal">
       <div class="service">
-        <div class="ico">S/01</div>
+        <div class="ico">Disponible</div>
         <h3>Sitios web</h3>
         <p>Página de presentación, portafolio o negocio. Responsivo, rápido y listo para Google.</p>
       </div>
       <div class="service">
-        <div class="ico">S/02</div>
+        <div class="ico">Disponible</div>
         <h3>Aplicaciones</h3>
         <p>Software de escritorio en Windows para gestionar ventas, inventario o cualquier proceso de tu negocio.</p>
       </div>
       <div class="service">
-        <div class="ico">S/03</div>
+        <div class="ico" style="color:var(--muted)">No disponible aún</div>
         <h3>Bases de datos</h3>
         <p>Diseño, organización y consultas con Oracle y SQL para que tu negocio tenga información ordenada.</p>
       </div>
       <div class="service">
-        <div class="ico">S/04</div>
+        <div class="ico">Disponible</div>
         <h3>Menús digitales</h3>
         <p>Carta digital con código QR para restaurantes y cafés. El cliente escanea y ve el menú al instante.</p>
       </div>
@@ -217,62 +201,10 @@ footer{padding:36px 0;}
   </div>
 </section>
 
-<section id="trabajo">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">02</span>
-      <h2>Trabajo seleccionado</h2>
-    </div>
-
-    <div class="project reveal">
-      <div class="num">01</div>
-      <div>
-        <h3>Sistema de gestión de ventas</h3>
-        <p class="desc">Aplicación de escritorio para administrar las ventas de un negocio: registro de pedidos, control de productos y generación de reportes.</p>
-        <div class="stack">
-          <span class="tag">C#</span>
-          <span class="tag">Windows Forms</span>
-          <span class="tag">.NET</span>
-        </div>
-      </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
-    </div>
-
-    <div class="project reveal">
-      <div class="num">02</div>
-      <div>
-        <h3>Menú digital con código QR</h3>
-        <p class="desc">Carta digital responsiva para restaurantes y cafés. Los clientes la abren escaneando un QR desde la mesa. Actualizable en minutos.</p>
-        <div class="stack">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
-      </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
-    </div>
-
-    <div class="project reveal">
-      <div class="num">03</div>
-      <div>
-        <h3>Portafolio web</h3>
-        <p class="desc">Sitio personal diseñado desde cero para presentar servicios y captar clientes. Minimalista, carga rápida y optimizado para móvil.</p>
-        <div class="stack">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
-      </div>
-      <a class="link" href="#"><span>Ver caso →</span></a>
-    </div>
-
-  </div>
-</section>
-
 <section id="sobre">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">03</span>
+      <span class="sec-num">02</span>
       <h2>Sobre mí</h2>
     </div>
     <div class="about reveal">
@@ -297,7 +229,7 @@ footer{padding:36px 0;}
 <section id="contacto">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">04</span>
+      <span class="sec-num">03</span>
       <h2>Contacto</h2>
     </div>
     <div class="contact-inner reveal">
